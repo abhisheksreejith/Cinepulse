@@ -1,12 +1,7 @@
-# Cinepulse – Movie App (TMDb spec, implemented with OMDb + mock)
+# Cinepulse – Movie App (TMDb)
 
 ## Overview
-Cinepulse is an iOS app built to satisfy the TMDb coding task: list popular movies, show details with a trailer, support search, and allow favorites. Due to TMDb API availability constraints during development, the app uses:
-- Mocked data for the Popular list on Home
-- OMDb (Open Movie Database) for search and movie details
-- A public MP4 link for the trailer playback demo
-
-The UI and flows match the original TMDb task; only the data source differs for Popular and Details/Trailer.
+Cinepulse is an iOS app that lists popular movies, provides search, detailed info with trailer playback, and favorites. The app now uses The Movie Database (TMDb) for Popular, Search, and Details. Trailer URLs are sourced from TMDb Videos.
 
 ## Architecture
 - Pattern: MVVM (Home screen) + View Controllers
@@ -14,27 +9,27 @@ The UI and flows match the original TMDb task; only the data source differs for 
 - Persistence: UserDefaults (favorites)
 - Networking: URLSession (no third-party dependency)
 
-## Features (spec vs implementation)
+## Features
 - Home (Popular Movies)
-  - Shows Title, Duration, Rating, Poster (poster from URL when available)
-  - Data source per spec: TMDb Popular endpoint
-  - Current implementation: Mocked list (until TMDb key/service is available)
+  - Shows Title, Duration, Rating, Poster
+  - Data: TMDb `/movie/popular`
 - Search
   - Search-as-you-type with 400ms debounce
-  - Uses OMDb: `https://www.omdbapi.com/?s={query}&apikey=...` + per-result detail hydration
+  - Data: TMDb `/search/movie`
 - Details
   - Title, Plot, Genre(s), Cast, Duration, Rating
-  - Trailer playback in embedded player
-  - Uses OMDb for details; trailer uses a public MP4 (changeable)
+  - Trailer: TMDb `/movie/{id}/videos` (YouTube key) – see Trailer notes below
+  - Data: TMDb `/movie/{id}` + `/movie/{id}/credits` + `/movie/{id}/videos`
 - Favorites
-  - Toggle from Home cells and Details screen
-  - Persisted across launches in UserDefaults
-  - Favorites screen lists saved items; tap to open Details
+  - Toggle from Home and Details
+  - Persisted across launches
+  - Favourites screen lists saved items; tap to open Details
 
 ## Data sources in this build
-- Popular: Mocked data (note: TMDb Popular is not called)
-- Details & Search: OMDb
-- Trailer: Public sample URL (Big Buck Bunny) as a stand-in for TMDb videos
+- Popular: TMDb
+- Search: TMDb
+- Details: TMDb (with credits and videos)
+- Trailer: TMDb Videos (YouTube key) – see notes below
 
 ## Setup
 ### Requirements
@@ -56,28 +51,26 @@ open Cinepulse.xcworkspace
 ```
 
 ### Secrets (not committed)
-You must create a local secrets file and add your keys:
-- Create the file: `Cinepulse/Config/Secrets.plist`
-- Add these keys:
-
+Create a local secrets file and add your keys:
+- File: `Cinepulse/Config/Secrets.plist`
+- Keys:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>OMDB_BASE_URL</key>
-    <string>https://www.omdbapi.com/</string>
-    <key>OMDB_API_KEY</key>
-    <string>c2bc4364</string>
+    <key>TMDB_BASE_URL</key>
+    <string>https://api.themoviedb.org/3</string>
+    <key>TMDB_API_KEY</key>
+    <string>REPLACE_WITH_YOUR_TMDB_KEY</string>
 </dict>
 </plist>
 ```
-
-- In Xcode, ensure the file is added to the app target:
-  - Select the file → File Inspector → Target Membership (check your app target)
+- In Xcode, add the file to the app target:
+  - Select file → File Inspector → Target Membership (check your app target)
   - Targets → Build Phases → Copy Bundle Resources: confirm `Secrets.plist` is listed
 
-Note: The file is gitignored and will not be pushed to the repository.
+Note: `Secrets.plist` is gitignored and won’t be pushed to the repository.
 
 ## Build & Run
 1) Ensure `Secrets.plist` is present and added to the target
@@ -85,10 +78,15 @@ Note: The file is gitignored and will not be pushed to the repository.
 3) Build and run on iOS Simulator or device
 
 ## How to use
-- Home screen shows a Popular section (mock data). Tap a movie to open Details
-- Search field: type to search; clearing the field restores the mock Popular list
-- Favorites: tap the heart on a movie cell or on the details screen to add/remove. Favorites are visible in the Favorites tab/screen and persist across restarts
-- Details: trailer auto-plays from the configured public URL; metadata comes from OMDb
+- Home: shows TMDb Popular. Tap a movie to open Details
+- Search: type to search; clearing the field reloads TMDb Popular
+- Favorites: tap the heart on Home or Details to add/remove. Favorites persist and are visible in the Favourites screen
+- Details: shows metadata from TMDb; trailer uses the TMDb Videos list
+
+## Trailer notes
+- TMDb Videos provide video metadata (provider + key), not a direct streamable URL.
+- When a YouTube trailer key is available, you can play it via a web embed (e.g., WKWebView with `https://www.youtube.com/embed/{KEY}`) or a YouTube player SDK. AVPlayer cannot play YouTube watch URLs directly.
+- Therefore, the app falls back to a public MP4 demo URL when a direct streamable trailer URL isn’t available.
 
 ## Key files
 - Home
@@ -108,25 +106,17 @@ Note: The file is gitignored and will not be pushed to the repository.
   - `Cinepulse/Config/Secrets.plist` (local only, not versioned)
 
 ## Assumptions
-- TMDb API was unavailable at build time, so the Popular list is mocked; search/details rely on OMDb which provides comparable metadata (Title/Plot/Genres/Cast/Runtime/Rating)
-- Trailer playback demonstrates the feature using a public MP4 URL. Replace with TMDb video URLs once TMDb is enabled
-- Poster images load from URLs when provided; otherwise a placeholder is shown
+- TMDb is the primary data source; OMDb is no longer required
+- Poster images load via TMDb image base URL when paths are present; otherwise a placeholder is shown
 
 ## Known limitations / Future work
-- Replace mocked Popular with TMDb `GET /movie/popular`
-- Replace OMDb with TMDb for Search and Details
-- Fetch TMDb trailers (`/movie/{movie_id}/videos`) and play the selected trailer
+- Replace AVPlayer for YouTube trailers with a WKWebView embed or YouTube Player SDK
 - Add pagination and image caching
 - Improve offline handling and error states
 - UI polish for dynamic type, accessibility labels, and dark mode nuances
 
 ## Mapping to TMDb Task
-- Popular list: Implemented (UI/flow), data mocked (pending TMDb integration)
-- Details: Implemented via OMDb; includes trailer UI with a public video URL
-- Search: Implemented (search-as-you-type) via OMDb
+- Popular list: Implemented via TMDb `/movie/popular`
+- Details: Implemented via TMDb (details, credits, videos)
+- Search: Implemented via TMDb `/search/movie`
 - Favorites: Implemented with persistence and visual indication
-
-## Changing data sources to TMDb (when available)
-- Add TMDb base URL and key to a new secrets entry
-- Update `MovieService` to call TMDb endpoints for Popular, Search and Details
-- Map TMDb responses to the existing `Movie` / `MovieDetail` models or adjust models accordingly
