@@ -10,6 +10,7 @@ import UIKit
 class FavouritesViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var emptyView: UIView!
+
     private var favorites: [Movie] = []
     private let spacing: CGFloat = 16
     private let numberOfColumns: CGFloat = 2
@@ -45,6 +46,8 @@ class FavouritesViewController: UIViewController {
 
     private func reloadFavorites() {
         favorites = FavoritesStore.shared.allFavorites()
+        emptyView.isHidden = !favorites.isEmpty
+        collectionView?.isHidden = favorites.isEmpty
         collectionView?.reloadData()
     }
 }
@@ -71,7 +74,7 @@ extension FavouritesViewController: UICollectionViewDelegate, UICollectionViewDa
         let selectedMovie = favorites[indexPath.item]
         let storyboard = UIStoryboard(name: "MovieDetails", bundle: nil)
         if let detailsVC = storyboard.instantiateViewController(withIdentifier: "MovieDetailsViewController") as? MovieDetailsViewController {
-            detailsVC.imdbID = selectedMovie.id
+            detailsVC.movieID = selectedMovie.id
             self.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }

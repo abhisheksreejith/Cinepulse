@@ -23,13 +23,30 @@ final class HomeViewModel {
 
     init(service: MovieServicing = MovieService()) {
         self.service = service
+        loadPopular()
+    }
+
+    func loadPopular() {
+        onLoadingChange?(true)
+        service.fetchPopular { [weak self] result in
+            guard let self = self else { return }
+            self.onLoadingChange?(false)
+            switch result {
+            case .failure(let error):
+                self.onError?(error.localizedDescription)
+                self.movies = []
+                self.onTitleChange?("Popular Movies")
+            case .success(let items):
+                self.movies = items
+                self.onTitleChange?("Popular Movies")
+            }
+        }
     }
 
     func search(query: String) {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            movies = []
-            onTitleChange?("Popular Movies")
+            loadPopular()
             return
         }
         onLoadingChange?(true)

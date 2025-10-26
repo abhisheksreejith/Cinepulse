@@ -48,4 +48,5 @@ struct MovieDetail: Codable {
     let plot: String?
     let genres: [String]
     let cast: [String]
+    let trailerURL: String?
 }

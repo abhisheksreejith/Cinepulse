@@ -23,7 +23,7 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var castCollection: UICollectionView!
     @IBOutlet weak var castHeightConstraint: NSLayoutConstraint!
 
-    var imdbID: String?
+    var movieID: String?
     private let service: MovieServicing = MovieService()
     private var genres: [String] = []
     private var cast: [String] = []
@@ -42,8 +42,6 @@ class MovieDetailsViewController: UIViewController {
         setupCast()
         setupLoading()
         loadDetails()
-        let urlString  = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        setTrailerURL(urlString)
     }
 
     override func viewDidLayoutSubviews() {
@@ -59,9 +57,9 @@ class MovieDetailsViewController: UIViewController {
     }
 
     private func loadDetails() {
-        guard let id = imdbID else { return }
+        guard let id = movieID else { return }
         setLoading(true)
-        service.fetchDetails(imdbID: id) { [weak self] result in
+        service.fetchDetails(movieID: id) { [weak self] result in
             switch result {
             case .failure:
                 self?.setLoading(false)
@@ -97,6 +95,14 @@ class MovieDetailsViewController: UIViewController {
             posterURL: detail.posterURL
         )
         updateFavoriteButton()
+
+        // Trailer: use fetched trailer URL if available; otherwise fallback sample
+        if let trailer = detail.trailerURL {
+            setTrailerURL(trailer)
+        } else {
+            let fallback = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            setTrailerURL(fallback)
+        }
     }
 }
 
@@ -225,6 +231,7 @@ extension MovieDetailsViewController: UICollectionViewDelegate, UICollectionView
         }
         if finalURL == nil { finalURL = URL(string: urlString) }
         guard let url = finalURL else { return }
+
         // Remove existing player if any
         if let existing = trailerPlayerVC {
             existing.willMove(toParent: nil)

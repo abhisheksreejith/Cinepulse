@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         bindViewModel()
         setupSearchHandlers()
         setupLoadingIndicator()
-        loadSampleData()
+//        loadSampleData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -275,7 +275,6 @@ class ViewController: UIViewController {
             newHeight.isActive = true
         }
     }
-
     
 }
 
@@ -318,7 +317,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         let selectedMovie = movies[indexPath.item]
         let storyboard = UIStoryboard(name: "MovieDetails", bundle: nil)
         if let detailsVC = storyboard.instantiateViewController(withIdentifier: "MovieDetailsViewController") as? MovieDetailsViewController {
-            detailsVC.imdbID = selectedMovie.id
+            detailsVC.movieID = selectedMovie.id
             self.navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
