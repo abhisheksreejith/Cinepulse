@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var mainScrollView: UIScrollView?
     @IBOutlet weak var moviesCollectionView: UICollectionView?
-
+    @IBOutlet weak var emptyView: UIView!
     private let viewModel = HomeViewModel()
     private var movies: [Movie] = []
     private let numberOfColumns: CGFloat = 2
@@ -82,6 +82,9 @@ class ViewController: UIViewController {
             self.movies = movies
             self.moviesCollectionView?.reloadData()
             self.updateCollectionViewHeight()
+            let isEmpty = movies.isEmpty
+            self.emptyView.isHidden = !isEmpty
+            self.mainScrollView?.isHidden = isEmpty
         }
         viewModel.onFavoritesChange = { [weak self] in
             self?.moviesCollectionView?.reloadData()
@@ -122,6 +125,8 @@ class ViewController: UIViewController {
             searchDebounceTimer?.invalidate()
             loadSampleData()
             titleLabel?.text = "Popular Movies"
+            self.emptyView.isHidden = true
+            self.mainScrollView?.isHidden = false
         } else {
             // Debounced search-as-you-type
             searchDebounceTimer?.invalidate()
@@ -134,7 +139,7 @@ class ViewController: UIViewController {
     private func setupLoadingIndicator() {
         guard let scrollView = mainScrollView else { return }
         loadingOverlay.translatesAutoresizingMaskIntoConstraints = false
-        loadingOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        loadingOverlay.backgroundColor = UIColor(named: "Background")?.withAlphaComponent(0.8)
         loadingOverlay.isHidden = true
         scrollView.addSubview(loadingOverlay)
         NSLayoutConstraint.activate([

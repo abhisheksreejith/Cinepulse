@@ -9,7 +9,7 @@ import UIKit
 
 class FavouritesViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView?
-
+    @IBOutlet weak var emptyView: UIView!
     private var favorites: [Movie] = []
     private let spacing: CGFloat = 16
     private let numberOfColumns: CGFloat = 2

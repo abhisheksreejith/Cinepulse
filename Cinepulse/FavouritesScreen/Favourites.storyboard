@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -53,7 +52,6 @@
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lR2-hn-ifZ">
                                         <rect key="frame" x="0.0" y="48" width="361" height="618"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BzL-VV-9tb">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -62,15 +60,34 @@
                                         </collectionViewFlowLayout>
                                         <cells/>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejk-Bs-gHQ">
+                                        <rect key="frame" x="0.0" y="32" width="361" height="634"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Favourites Yet." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp1-na-6Jh">
+                                                <rect key="frame" x="108.00000000000001" y="306.33333333333331" width="145.33333333333337" height="21.666666666666686"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" name="Divider"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Cp1-na-6Jh" firstAttribute="centerX" secondItem="ejk-Bs-gHQ" secondAttribute="centerX" id="aE7-Td-8fK"/>
+                                            <constraint firstItem="Cp1-na-6Jh" firstAttribute="centerY" secondItem="ejk-Bs-gHQ" secondAttribute="centerY" id="pD3-vr-Zhc"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="lR2-hn-ifZ" secondAttribute="bottom" id="5HI-8a-1Xa"/>
                                     <constraint firstItem="lR2-hn-ifZ" firstAttribute="top" secondItem="tfC-KZ-ZC7" secondAttribute="bottom" constant="16" id="8jv-LU-p8n"/>
                                     <constraint firstItem="tfC-KZ-ZC7" firstAttribute="leading" secondItem="dIV-OO-TBn" secondAttribute="leading" id="EE0-sU-HiU"/>
+                                    <constraint firstItem="ejk-Bs-gHQ" firstAttribute="leading" secondItem="dIV-OO-TBn" secondAttribute="leading" id="IYs-S6-xjf"/>
                                     <constraint firstItem="tfC-KZ-ZC7" firstAttribute="top" secondItem="dIV-OO-TBn" secondAttribute="top" id="KDp-Ih-Ceu"/>
+                                    <constraint firstAttribute="trailing" secondItem="ejk-Bs-gHQ" secondAttribute="trailing" id="Kqa-tm-Q8s"/>
+                                    <constraint firstAttribute="bottom" secondItem="ejk-Bs-gHQ" secondAttribute="bottom" id="MRW-lS-I1k"/>
                                     <constraint firstItem="lR2-hn-ifZ" firstAttribute="leading" secondItem="dIV-OO-TBn" secondAttribute="leading" id="ZXS-He-WqT"/>
                                     <constraint firstAttribute="trailing" secondItem="tfC-KZ-ZC7" secondAttribute="trailing" id="bNp-7F-4F2"/>
+                                    <constraint firstItem="ejk-Bs-gHQ" firstAttribute="top" secondItem="tfC-KZ-ZC7" secondAttribute="bottom" id="eEI-oF-vHD"/>
                                     <constraint firstAttribute="trailing" secondItem="lR2-hn-ifZ" secondAttribute="trailing" id="gJW-ie-VEn"/>
                                 </constraints>
                             </view>
@@ -86,6 +103,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="lR2-hn-ifZ" id="fav-out-1"/>
+                        <outlet property="emptyView" destination="ejk-Bs-gHQ" id="FT4-t2-eOR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -98,11 +116,11 @@
         <namedColor name="Background">
             <color red="0.97600001096725464" green="0.97600001096725464" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Divider">
+            <color red="0.22699999809265137" green="0.22699999809265137" blue="0.23499999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="TextPrimary">
             <color red="0.10999999940395355" green="0.10999999940395355" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

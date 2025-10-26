@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -64,6 +63,21 @@
                                     <constraint firstItem="2kk-1R-8dP" firstAttribute="top" secondItem="NAg-aZ-xl2" secondAttribute="top" id="n89-73-1uZ"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3M-EA-v7l">
+                                <rect key="frame" x="16" y="212" width="398" height="652"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOK-0l-I30">
+                                        <rect key="frame" x="127" y="314" width="144" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" name="Divider"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="uOK-0l-I30" firstAttribute="centerY" secondItem="P3M-EA-v7l" secondAttribute="centerY" id="ZnM-M9-H10"/>
+                                    <constraint firstItem="uOK-0l-I30" firstAttribute="centerX" secondItem="P3M-EA-v7l" secondAttribute="centerX" id="cv9-hE-BQn"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWq-hO-pnD">
                                 <rect key="frame" x="16" y="166" width="398" height="698"/>
                                 <subviews>
@@ -78,7 +92,6 @@
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fSi-eJ-ePM">
                                                 <rect key="frame" x="0.0" y="59" width="398" height="639"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eoo-m5-Hdd">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -108,13 +121,18 @@
                             <constraint firstItem="sWq-hO-pnD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="428-qv-H2n"/>
                             <constraint firstItem="NAg-aZ-xl2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8F5-Rc-5Ez"/>
                             <constraint firstItem="NAg-aZ-xl2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H2o-Q5-4W4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P3M-EA-v7l" secondAttribute="bottom" id="XbO-Tf-vof"/>
+                            <constraint firstItem="P3M-EA-v7l" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="a5d-mi-DCO"/>
                             <constraint firstItem="NAg-aZ-xl2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cSX-ad-zoA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sWq-hO-pnD" secondAttribute="trailing" constant="16" id="dl7-Mt-nmw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P3M-EA-v7l" secondAttribute="trailing" constant="16" id="jSU-jb-dzi"/>
                             <constraint firstItem="sWq-hO-pnD" firstAttribute="top" secondItem="NAg-aZ-xl2" secondAttribute="bottom" constant="8" symbolic="YES" id="kSl-kN-qNg"/>
+                            <constraint firstItem="P3M-EA-v7l" firstAttribute="top" secondItem="NAg-aZ-xl2" secondAttribute="bottom" id="vdL-WP-fb2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FcL-jA-jmr"/>
                     <connections>
+                        <outlet property="emptyView" destination="P3M-EA-v7l" id="Qt1-dm-S41"/>
                         <outlet property="mainScrollView" destination="sWq-hO-pnD" id="SeA-Rc-scrl"/>
                         <outlet property="moviesCollectionView" destination="fSi-eJ-ePM" id="O2n-S0-atp"/>
                         <outlet property="searchButton" destination="44W-us-c5B" id="SeA-Rc-hBtn"/>
@@ -155,6 +173,9 @@
         <namedColor name="Background">
             <color red="0.97600001096725464" green="0.97600001096725464" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Divider">
+            <color red="0.22699999809265137" green="0.22699999809265137" blue="0.23499999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="SearchButton">
             <color red="0.55699998140335083" green="0.55699998140335083" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -164,8 +185,5 @@
         <namedColor name="TextPrimary">
             <color red="0.10999999940395355" green="0.10999999940395355" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

@@ -37,11 +37,12 @@ class MovieDetailsViewController: UIViewController {
         descriptionLabel.numberOfLines = 0
         descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
         descriptionLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        trailerView.layer.cornerRadius = 16
         setupGenres()
         setupCast()
         setupLoading()
         loadDetails()
-        let urlString  = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        let urlString  = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         setTrailerURL(urlString)
     }
 
@@ -105,7 +106,6 @@ extension MovieDetailsViewController {
         let hasCast = !cast.isEmpty
         castTitleLabel.isHidden = !hasCast
         castStack?.isHidden = !hasCast
-        // We now use castCollection to render the grid; nothing more to do here
     }
 }
 
@@ -185,7 +185,7 @@ extension MovieDetailsViewController: UICollectionViewDelegate, UICollectionView
     // MARK: - Loading UI
     private func setupLoading() {
         loadingOverlay.translatesAutoresizingMaskIntoConstraints = false
-        loadingOverlay.backgroundColor = UIColor.black.withAlphaComponent(1)
+        loadingOverlay.backgroundColor = UIColor(named: "Background")?.withAlphaComponent(1)
         loadingOverlay.isHidden = true
         view.addSubview(loadingOverlay)
         NSLayoutConstraint.activate([
@@ -218,7 +218,13 @@ extension MovieDetailsViewController: UICollectionViewDelegate, UICollectionView
     // MARK: - Trailer Playback
     func setTrailerURL(_ urlString: String) {
         guard let container = trailerView else { return }
-        guard let url = URL(string: urlString) else { return }
+        var finalURL: URL?
+        if var comps = URLComponents(string: urlString) {
+            if comps.scheme == "http" { comps.scheme = "https" }
+            finalURL = comps.url
+        }
+        if finalURL == nil { finalURL = URL(string: urlString) }
+        guard let url = finalURL else { return }
         // Remove existing player if any
         if let existing = trailerPlayerVC {
             existing.willMove(toParent: nil)
@@ -230,6 +236,7 @@ extension MovieDetailsViewController: UICollectionViewDelegate, UICollectionView
         let vc = AVPlayerViewController()
         vc.player = player
         vc.showsPlaybackControls = true
+        vc.videoGravity = .resizeAspectFill
 
         addChild(vc)
         vc.view.translatesAutoresizingMaskIntoConstraints = false
@@ -242,8 +249,11 @@ extension MovieDetailsViewController: UICollectionViewDelegate, UICollectionView
         ])
         vc.didMove(toParent: self)
         trailerPlayerVC = vc
-
-        player.play()
+        container.layer.cornerRadius = 16
+        container.layer.masksToBounds = true
+        DispatchQueue.main.async {
+            player.play()
+        }
     }
 
     // MARK: - Favorites
