@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DC3CF00D8E0A391AB52522DE /* Pods_Cinepulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8FBF64C5A1C3208A60523E2 /* Pods_Cinepulse.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		38597E102EACFE7500C735DA /* Cinepulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinepulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65BE0016CF25E2906EC20251 /* Pods-Cinepulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cinepulse.debug.xcconfig"; path = "Target Support Files/Pods-Cinepulse/Pods-Cinepulse.debug.xcconfig"; sourceTree = "<group>"; };
+		A8FBF64C5A1C3208A60523E2 /* Pods_Cinepulse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cinepulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB725CD28669C8EAADA5AC0C /* Pods-Cinepulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cinepulse.release.xcconfig"; path = "Target Support Files/Pods-Cinepulse/Pods-Cinepulse.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3CF00D8E0A391AB52522DE /* Pods_Cinepulse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +55,8 @@
 			children = (
 				38597E122EACFE7500C735DA /* Cinepulse */,
 				38597E112EACFE7500C735DA /* Products */,
+				616DF3157C3F925931C9BDF7 /* Pods */,
+				841709A4B4A571FB7F14C146 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +68,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		616DF3157C3F925931C9BDF7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				65BE0016CF25E2906EC20251 /* Pods-Cinepulse.debug.xcconfig */,
+				AB725CD28669C8EAADA5AC0C /* Pods-Cinepulse.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		841709A4B4A571FB7F14C146 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8FBF64C5A1C3208A60523E2 /* Pods_Cinepulse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,6 +92,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38597E232EACFE7600C735DA /* Build configuration list for PBXNativeTarget "Cinepulse" */;
 			buildPhases = (
+				274D3D9440F7FDB94742EFA9 /* [CP] Check Pods Manifest.lock */,
 				38597E0C2EACFE7500C735DA /* Sources */,
 				38597E0D2EACFE7500C735DA /* Frameworks */,
 				38597E0E2EACFE7500C735DA /* Resources */,
@@ -77,8 +105,6 @@
 				38597E122EACFE7500C735DA /* Cinepulse */,
 			);
 			name = Cinepulse;
-			packageProductDependencies = (
-			);
 			productName = Cinepulse;
 			productReference = 38597E102EACFE7500C735DA /* Cinepulse.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +153,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		274D3D9440F7FDB94742EFA9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cinepulse-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		38597E0C2EACFE7500C735DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +191,7 @@
 /* Begin XCBuildConfiguration section */
 		38597E242EACFE7600C735DA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65BE0016CF25E2906EC20251 /* Pods-Cinepulse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -171,6 +223,7 @@
 		};
 		38597E252EACFE7600C735DA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB725CD28669C8EAADA5AC0C /* Pods-Cinepulse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

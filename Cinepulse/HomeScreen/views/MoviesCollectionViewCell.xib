@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="moviesCell" reuseIdentifier="MovieCell" id="gTV-IL-0wX" customClass="MoviesCollectionViewCell" customModule="Cinepulse" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="165" height="334"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="165" height="334"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSM-s5-IHy">
+                        <rect key="frame" x="0.0" y="0.0" width="165" height="334"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="MovieName" textAlignment="natural" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGS-YH-vpc">
+                                <rect key="frame" x="0.0" y="252.66666666666663" width="165" height="36"/>
+                                <fontDescription key="fontDescription" name="NotoSansMyanmar-Bold" family="Noto Sans Myanmar" pointSize="13"/>
+                                <color key="textColor" name="TextPrimary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NxM-Uo-9Ur">
+                                <rect key="frame" x="0.0" y="290.66666666666669" width="165" height="12"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9bV-gF-Nht">
+                                        <rect key="frame" x="0.0" y="-0.33333333333333215" width="12" height="11.666666666666666"/>
+                                        <color key="tintColor" name="Primary"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="Shr-Ci-kc3"/>
+                                            <constraint firstAttribute="width" secondItem="9bV-gF-Nht" secondAttribute="height" multiplier="1:1" id="o8K-6a-tOL"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCQ-r7-5Q5">
+                                        <rect key="frame" x="17" y="0.0" width="148" height="12"/>
+                                        <fontDescription key="fontDescription" name="NotoSansMyanmar-Bold" family="Noto Sans Myanmar" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtm-WQ-dnJ">
+                                <rect key="frame" x="0.0" y="304.66666666666669" width="165" height="24.333333333333314"/>
+                                <fontDescription key="fontDescription" name="NotoSansMyanmar-Regular" family="Noto Sans Myanmar" pointSize="11"/>
+                                <color key="textColor" name="TextSecondary"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="XbL-4d-Mgb">
+                                <rect key="frame" x="0.0" y="0.0" width="165" height="247.66666666666666"/>
+                                <color key="backgroundColor" name="SearchButton"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XbL-4d-Mgb" secondAttribute="height" multiplier="2:3" id="cgi-Sw-6S9"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24r-ax-3eW">
+                                <rect key="frame" x="138" y="5" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="24r-ax-3eW" secondAttribute="height" multiplier="1:1" id="0Fq-CH-OGb"/>
+                                    <constraint firstAttribute="height" constant="22" id="fHx-n8-VfM"/>
+                                </constraints>
+                                <color key="tintColor" name="Accent"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="heart" catalog="system" symbolScale="small"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="favoriteTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fav-act-1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RGS-YH-vpc" secondAttribute="trailing" id="HwL-i7-jxo"/>
+                            <constraint firstItem="Xtm-WQ-dnJ" firstAttribute="top" secondItem="NxM-Uo-9Ur" secondAttribute="bottom" constant="2" id="HyJ-zC-vRp"/>
+                            <constraint firstAttribute="trailing" secondItem="Xtm-WQ-dnJ" secondAttribute="trailing" id="PS3-MC-riy"/>
+                            <constraint firstItem="XbL-4d-Mgb" firstAttribute="top" secondItem="NSM-s5-IHy" secondAttribute="top" id="QWt-EV-rON"/>
+                            <constraint firstItem="24r-ax-3eW" firstAttribute="top" secondItem="NSM-s5-IHy" secondAttribute="top" constant="5" id="S05-ry-sPp"/>
+                            <constraint firstItem="Xtm-WQ-dnJ" firstAttribute="leading" secondItem="NSM-s5-IHy" secondAttribute="leading" id="TwZ-wA-AYE"/>
+                            <constraint firstItem="NxM-Uo-9Ur" firstAttribute="top" secondItem="RGS-YH-vpc" secondAttribute="bottom" constant="2" id="Zd3-EC-RSp"/>
+                            <constraint firstItem="RGS-YH-vpc" firstAttribute="top" secondItem="XbL-4d-Mgb" secondAttribute="bottom" constant="5" id="bvW-yP-rhQ"/>
+                            <constraint firstItem="RGS-YH-vpc" firstAttribute="leading" secondItem="NSM-s5-IHy" secondAttribute="leading" id="f2r-kE-Ptd"/>
+                            <constraint firstAttribute="trailing" secondItem="XbL-4d-Mgb" secondAttribute="trailing" id="gH4-g3-m35"/>
+                            <constraint firstAttribute="trailing" secondItem="24r-ax-3eW" secondAttribute="trailing" constant="5" id="joG-jL-xgg"/>
+                            <constraint firstAttribute="trailing" secondItem="NxM-Uo-9Ur" secondAttribute="trailing" id="lGg-cd-xep"/>
+                            <constraint firstItem="XbL-4d-Mgb" firstAttribute="leading" secondItem="NSM-s5-IHy" secondAttribute="leading" id="vsf-oN-inY"/>
+                            <constraint firstAttribute="bottom" secondItem="Xtm-WQ-dnJ" secondAttribute="bottom" constant="5" id="x2Y-gz-nUV"/>
+                            <constraint firstItem="NxM-Uo-9Ur" firstAttribute="leading" secondItem="NSM-s5-IHy" secondAttribute="leading" id="yHs-27-v2R"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="NSM-s5-IHy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ItC-bh-Abv"/>
+                <constraint firstItem="NSM-s5-IHy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Nvy-Hi-2EP"/>
+                <constraint firstAttribute="trailing" secondItem="NSM-s5-IHy" secondAttribute="trailing" id="P4o-Ug-xCg"/>
+                <constraint firstAttribute="bottom" secondItem="NSM-s5-IHy" secondAttribute="bottom" id="e8r-5G-64h"/>
+            </constraints>
+            <size key="customSize" width="165" height="334"/>
+            <connections>
+                <outlet property="durationLabel" destination="Xtm-WQ-dnJ" id="XKw-WC-1ii"/>
+                <outlet property="favoriteButton" destination="24r-ax-3eW" id="HVT-2T-FAV"/>
+                <outlet property="movieTitle" destination="RGS-YH-vpc" id="BLb-cd-YPm"/>
+                <outlet property="posterImage" destination="XbL-4d-Mgb" id="wmR-ec-KlI"/>
+                <outlet property="ratingLabel" destination="wCQ-r7-5Q5" id="HVT-2T-GAW"/>
+            </connections>
+            <point key="canvasLocation" x="-162.59541984732823" y="152.81690140845072"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="photo" width="128" height="128"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="Accent">
+            <color red="1" green="0.23100000619888306" blue="0.18799999356269836" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SearchButton">
+            <color red="0.55699998140335083" green="0.55699998140335083" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextPrimary">
+            <color red="0.10999999940395355" green="0.10999999940395355" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextSecondary">
+            <color red="0.59600001573562622" green="0.59600001573562622" blue="0.62400001287460327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
